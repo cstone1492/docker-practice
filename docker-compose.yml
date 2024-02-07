@@ -1,0 +1,24 @@
+name: docker-practice
+version: '.1'
+services:
+  app:
+    container_name: docker-practice
+    build: .
+    ports: 
+      - '80:80'
+  postgres:
+    image: postgres:alpine
+    environment:
+      POSTGRES_DB: database-name
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: username
+    restart: on-failure:3
+  pgweb:
+    image: sosedoff/pgweb
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://username:password@postgres:5432/database-name?sslmode=disable
+    ports:
+      - 8085:8081
+    restart: on-failure:3
