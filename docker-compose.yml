@@ -6,10 +6,12 @@ services:
     build: .
     ports: 
       - '80:80'
+    depends_on:
+      - postgres
   postgres:
     image: postgres:alpine
     environment:
-      POSTGRES_DB: database-name
+      POSTGRES_DB: database
       POSTGRES_PASSWORD: password
       POSTGRES_USER: username
     restart: on-failure:3
@@ -18,7 +20,7 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgres://username:password@postgres:5432/database-name?sslmode=disable
+      DATABASE_URL: postgres://username:password@postgres:5432/database?sslmode=disable
     ports:
       - 8085:8081
     restart: on-failure:3
