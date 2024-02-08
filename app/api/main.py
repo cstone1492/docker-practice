@@ -1,8 +1,8 @@
 from typing import Union, Annotated
 from pydantic import BaseModel, conint, constr, confloat, conset, validate_call, Field
 from fastapi import FastAPI, Query, Path
-from .app import app_create
-from .database import schema
+from ..app import app_create
+from ..database import schema
 import json
 
 app = app_create()
@@ -11,11 +11,6 @@ app = app_create()
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
 
 @validate_call
 @app.post("/post")

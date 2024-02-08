@@ -6,5 +6,5 @@ general:
     password: password
     port: 5432
     db: database
-    sslmode: allow
-    url: postgresql://username:password@postgres:5432/database?sslmode=disable
+    sslmode: disable
+    

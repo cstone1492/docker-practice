@@ -33,9 +33,14 @@ class Post(Base):
     created_at = Column(TIMESTAMP(timezone=True), server_default=text('now()'))
     def create_unique_id(self):
         self.id = create_unique_id()
+
 def engine_init(config):
     from sqlalchemy import create_engine
     db_config = config['database']
+    if db_config['type'] == 'postgres':
+        url = f"postgresql://{db_config['user']}:{db_config['password']}@postgres:{db_config['port']}/{db_config['db']}?sslmode={db_config['sslmode']}"
+    else:
+        return 'unknown db type'
     # sql_engine = create_engine('postgresql://username:password@postgres:5432/database?sslmode=disable')
     sql_engine = create_engine(db_config['url'])
     Base.metadata.create_all(bind=sql_engine)
