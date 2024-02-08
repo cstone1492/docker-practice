@@ -1,6 +1,9 @@
 # 
 FROM python:3.9
 
+ARG BACKEND_ENV=general
+ENV BACKEND_ENV $BACKEND_ENV
+
 # 
 WORKDIR /code
 
