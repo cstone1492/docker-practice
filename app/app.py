@@ -55,7 +55,14 @@ def app_create():
     from os import environ
 
     global _app
-    _app = FastAPI()
+
+    # read in description
+    description_content = ""
+    with open('app/README.md', 'rt') as f:
+        description_content = f.read()
+
+    # create app
+    _app = FastAPI(description=description_content)
 
     # create logger
     _app.logger = logger_create()
