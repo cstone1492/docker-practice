@@ -50,8 +50,8 @@ def logger_destroy():
 
 
 def app_create():
-    from .database.database import session_init
-    from .database.schema import engine_init
+    from ..database.database import session_init
+    from ..database.schema import engine_init
     from os import environ
 
     global _app
@@ -79,6 +79,8 @@ def app_create():
 
     # bind sql_session
     _app.sql_engine= engine_init(_app.config)
+    if isinstance(_app.sql_engine, str):
+        _app.logger.warning(f"error connecting to db, {_app.sql_engine}")
     _app.sql_session = session_init(_app.sql_engine)
 
     _app.logger.info('set configuration: {}'.format(_app.config))

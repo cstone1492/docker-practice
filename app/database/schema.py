@@ -42,6 +42,6 @@ def engine_init(config):
     else:
         return 'unknown db type'
     # sql_engine = create_engine('postgresql://username:password@postgres:5432/database?sslmode=disable')
-    sql_engine = create_engine(db_config['url'])
+    sql_engine = create_engine(url)
     Base.metadata.create_all(bind=sql_engine)
     return sql_engine

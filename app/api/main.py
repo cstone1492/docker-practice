@@ -1,7 +1,7 @@
 from typing import Union, Annotated
 from pydantic import BaseModel, conint, constr, confloat, conset, validate_call, Field
 from fastapi import FastAPI, Query, Path
-from ..app import app_create
+from .app import app_create
 from ..database import schema
 import json
 
