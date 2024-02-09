@@ -1,4 +1,4 @@
-from app.database.database import Base
+from content.database.database import Base
 from sqlalchemy import Column, Integer, String, TIMESTAMP, Boolean, text
 from sqlalchemy import JSON, CheckConstraint, Column, ForeignKey, Integer
 from sqlalchemy import \

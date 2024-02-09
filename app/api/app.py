@@ -52,6 +52,7 @@ def logger_destroy():
 def app_create():
     from ..database.database import session_init
     from ..database.schema import engine_init
+    from fastapi.middleware.cors import CORSMiddleware
     from os import environ
 
     global _app
@@ -64,9 +65,19 @@ def app_create():
     # create app
     _app = FastAPI(description=description_content)
 
+    # add middleware
+    _app.add_middleware(CORSMiddleware,
+    allow_origins=["http://localhost:80"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
     # create logger
     _app.logger = logger_create()
     _app.logger.warning('created logger')
+
+
     # set config
     path_config = 'app/config/config.yaml'
   
